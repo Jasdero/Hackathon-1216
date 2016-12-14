@@ -13,12 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class GameAnswer
 {
 	/**
-	 * Many GameAnswer have One image.
-	 * @ORM\ManyToOne(targetEntity="Image")
-	 * @ORM\JoinColumn(name="image_id", referencedColumnName="id", cascade={"persist", "remove"})
+	 * One Product has One Shipping.
+	 * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
+	 * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
 	 */
 	protected $image;
-
 
 	/**
 	 * Many GameAnswer have One User.
