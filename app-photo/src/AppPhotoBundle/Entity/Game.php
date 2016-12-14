@@ -12,17 +12,25 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Game
 {
-//	/**
-//	 * One Game has One Leader.
-//	 * @OneToOne(targetEntity="User")
-//	 * @JoinColumn(name="user_id", referencedColumnName="id")
-//	 */
+	/**
+	 * One Game has One Leader.
+	 * @ORM\OneToOne(targetEntity="User")
+	 * @ORM\JoinColumn(name="leader_id", referencedColumnName="id")
+	 */
+	private $leader;
 
 	/**
 	 * One Game has One To guess Image.
-	 * @OneToOne(targetEntity="Image")
-	 * @JoinColumn(name="to_guess_image_id", referencedColumnName="id")
+	 * @ORM\OneToOne(targetEntity="Image")
+	 * @ORM\JoinColumn(name="to_guess_image_id", referencedColumnName="id")
 	 */
+	private $toGuessImage;
+
+	/**
+	 * One Game has Many GameAnswer.
+	 * @ORM\OneToMany(targetEntity="GameAnswer", mappedBy="game")
+	 */
+	private $propositions;
 
 	////////////////////
 	// Generated code //
@@ -46,5 +54,94 @@ class Game
     public function getId()
     {
         return $this->id;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->propositions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set leader
+     *
+     * @param \AppPhotoBundle\Entity\User $leader
+     *
+     * @return Game
+     */
+    public function setLeader(\AppPhotoBundle\Entity\User $leader = null)
+    {
+        $this->leader = $leader;
+
+        return $this;
+    }
+
+    /**
+     * Get leader
+     *
+     * @return \AppPhotoBundle\Entity\User
+     */
+    public function getLeader()
+    {
+        return $this->leader;
+    }
+
+    /**
+     * Set toGuessImage
+     *
+     * @param \AppPhotoBundle\Entity\Image $toGuessImage
+     *
+     * @return Game
+     */
+    public function setToGuessImage(\AppPhotoBundle\Entity\Image $toGuessImage = null)
+    {
+        $this->toGuessImage = $toGuessImage;
+
+        return $this;
+    }
+
+    /**
+     * Get toGuessImage
+     *
+     * @return \AppPhotoBundle\Entity\Image
+     */
+    public function getToGuessImage()
+    {
+        return $this->toGuessImage;
+    }
+
+    /**
+     * Add proposition
+     *
+     * @param \AppPhotoBundle\Entity\GameAnswer $proposition
+     *
+     * @return Game
+     */
+    public function addProposition(\AppPhotoBundle\Entity\GameAnswer $proposition)
+    {
+        $this->propositions[] = $proposition;
+
+        return $this;
+    }
+
+    /**
+     * Remove proposition
+     *
+     * @param \AppPhotoBundle\Entity\GameAnswer $proposition
+     */
+    public function removeProposition(\AppPhotoBundle\Entity\GameAnswer $proposition)
+    {
+        $this->propositions->removeElement($proposition);
+    }
+
+    /**
+     * Get propositions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPropositions()
+    {
+        return $this->propositions;
     }
 }
