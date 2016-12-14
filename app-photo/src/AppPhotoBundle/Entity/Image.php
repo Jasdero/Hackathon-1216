@@ -12,9 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Image
 {
-
-
-
+	/*
+	 * TODO: Code here <3
+	 */
 
 	////////////////////
 	// Generated code //
