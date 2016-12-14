@@ -1,0 +1,4 @@
+services:
+#    app_photo.example:
+#        class: AppPhotoBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

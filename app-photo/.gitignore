@@ -1,4 +1,4 @@
-/web/bundles/
+B/web/bundles/
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -12,3 +12,5 @@
 /composer.phar
 /app/cache/
 /app/logs/
+.idea
+.nbproject
