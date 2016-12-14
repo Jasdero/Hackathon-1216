@@ -14,7 +14,7 @@ class User extends BaseUser
 {
 	/**
 	 * One User has Many Games he leads.
-	 * @ORM\OneToMany(targetEntity="Game", mappedBy="leader")
+	 * @ORM\OneToMany(targetEntity="Game", mappedBy="leader", cascade={"remove"})
 	 */
 	protected $leadedGames;
 
@@ -25,12 +25,13 @@ class User extends BaseUser
 	 */
 	protected $playedGames;
 
-
 	/**
 	 * One User has Many GameAnswer.
 	 * @ORM\OneToMany(targetEntity="GameAnswer", mappedBy="user")
 	 */
 	protected $propositions;
+
+	protected $score;
 
 	////////////////////
 	// Generated code //

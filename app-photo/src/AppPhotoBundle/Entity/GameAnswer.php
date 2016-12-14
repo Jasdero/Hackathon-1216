@@ -15,7 +15,7 @@ class GameAnswer
 	/**
 	 * Many GameAnswer have One image.
 	 * @ORM\ManyToOne(targetEntity="Image")
-	 * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="image_id", referencedColumnName="id", cascade={"persist", "remove"})
 	 */
 	protected $image;
 

@@ -28,7 +28,7 @@ class Game
 
 	/**
 	 * One Game has Many GameAnswer.
-	 * @ORM\OneToMany(targetEntity="GameAnswer", mappedBy="game")
+	 * @ORM\OneToMany(targetEntity="GameAnswer", mappedBy="game", cascade={"remove"})
 	 */
 	private $propositions;
 
