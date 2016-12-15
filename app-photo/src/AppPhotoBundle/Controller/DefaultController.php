@@ -14,4 +14,12 @@ class DefaultController extends Controller
     {
         return $this->render('AppPhotoBundle:Default:index.html.twig');
     }
+
+    /**
+     * @Route("/test", name="test")
+     */
+    public function testAction()
+    {
+        return $this->render('AppPhotoBundle:Default:test.html.twig');
+    }
 }

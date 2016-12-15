@@ -10,13 +10,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        
+        <title>{% block title %}Welcome!{% endblock %}</title>
+
+
     </head>
-
+            
     <body>
-
+{% block body %}
         <!-- Wrapper -->
             <div id="wrapper">
 
@@ -38,6 +40,8 @@
                                 <li><a href="#work">Work</a></li>
                                 <li><a href="#about">About</a></li>
                                 <li><a href="#contact">Contact</a></li>
+                                <li><a href="{{ path('test')}}">Test</a></li>
+                                
                                 <!--<li><a href="#elements">Elements</a></li>-->
                             </ul>
                         </nav>
@@ -46,7 +50,8 @@
                 <!-- Main -->
                     <div id="main">
 
-                        <!-- Intro -->
+
+
                             <article id="intro">
                                 <h2 class="major">Intro</h2>
                                 <span class="image main"><img src="{{ asset('images/pic01.jpg') }}" alt="" /></span>
@@ -352,12 +357,15 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
  
             <div id="bg"></div>
 
-       
+{% endblock %}    
+
+
             <script src="{{asset('js/jquery.min.js') }}"></script>
             <script src="{{asset('js/skel.min.js') }}"></script>
             <script src="{{asset('js/util.js') }}"></script>
             <script src="{{asset('js/main.js') }}"></script>
 
     </body>
+    
 </html>
 
