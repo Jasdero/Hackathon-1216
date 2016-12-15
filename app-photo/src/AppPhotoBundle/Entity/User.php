@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+	public function __toString() {
+		return $this->username;
+	}
 	/**
 	 * One User has Many Games he leads.
 	 * @ORM\OneToMany(targetEntity="Game", mappedBy="leader", cascade={"remove"})

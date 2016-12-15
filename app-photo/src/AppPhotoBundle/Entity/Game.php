@@ -2,9 +2,7 @@
 
 namespace AppPhotoBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Game
  *
@@ -14,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Game
 {
 	public function __toString() {
-		return "string";
+		return "Game #" . $this->id . "\t by " . strval($this->leader);
 	}
 	/**
 	 * One Game has One Leader.

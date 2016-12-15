@@ -16,6 +16,10 @@ class Image
 	 * TODO: Code here <3
 	 */
 
+	public function __toString() {
+		return "[Image]";
+	}
+
 	////////////////////
 	// Generated code //
 	////////////////////
@@ -64,7 +68,6 @@ class Image
     public function setPath($path)
     {
         $this->path = $path;
-
         return $this;
     }
 
