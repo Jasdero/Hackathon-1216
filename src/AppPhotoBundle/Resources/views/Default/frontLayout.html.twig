@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}
-    {% include 'AppPhotoBundle:Default:header.html.twig' %}
+    {{ render(controller('AppPhotoBundle:Default:header')) }}
 {% endblock %}
 {% block body %}
 {% endblock %}

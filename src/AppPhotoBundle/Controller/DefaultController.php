@@ -50,6 +50,14 @@ class DefaultController extends Controller
             'edit_form' => $editForm->createView(),
         ));
     }
+
+    public function headerAction()
+    {
+        $user = $this->getUser();
+        return $this->render('@AppPhoto/Default/header.html.twig', array(
+            'user' => $user,
+        ));
+    }
     /**
      * @Route("/index", name="index")
      *
