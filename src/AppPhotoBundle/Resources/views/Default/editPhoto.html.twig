@@ -7,3 +7,20 @@
 <input type="submit" value="Modifier" />
 {{ form_end(edit_form) }}
 {% endblock %}
+{% block footer %}
+    <footer class="navbar-fixed-bottom" style="margin-bottom:8px">
+        <div class="row">
+            <center>
+                <div class="col-xs-4">
+                    <a title="Profil" href="{{ path('profil') }}"><i class="fa fa-users fa-3x" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-xs-4">
+                    <a title="Créer une partie" href="#"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-xs-4">
+                    <a title="Classement" href="#"><i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i></a>
+                </div>
+            </center>
+        </div>
+    </footer>
+{% endblock %}
