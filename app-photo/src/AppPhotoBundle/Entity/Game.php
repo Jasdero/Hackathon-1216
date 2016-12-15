@@ -2,6 +2,7 @@
 
 namespace AppPhotoBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Game
 {
+	public function __toString() {
+		return "string";
+	}
 	/**
 	 * One Game has One Leader.
 	 * @ORM\ManyToOne(targetEntity="User", inversedBy="leadedGames")

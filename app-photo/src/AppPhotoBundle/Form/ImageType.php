@@ -13,7 +13,7 @@ class ImageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('coment')->add('path')        ;
+        $builder->add('comment')->add('path')        ;
     }
     
     /**

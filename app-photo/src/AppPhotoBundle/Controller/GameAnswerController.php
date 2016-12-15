@@ -2,6 +2,7 @@
 
 namespace AppPhotoBundle\Controller;
 
+use AppPhotoBundle\Entity\Game;
 use AppPhotoBundle\Entity\GameAnswer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -27,7 +28,7 @@ class GameAnswerController extends Controller
 
         $gameAnswers = $em->getRepository('AppPhotoBundle:GameAnswer')->findAll();
 
-        return $this->render('gameanswer/index.html.twig', array(
+        return $this->render('@AppPhoto/gameanswer/index.html.twig', array(
             'gameAnswers' => $gameAnswers,
         ));
     }
@@ -35,16 +36,18 @@ class GameAnswerController extends Controller
     /**
      * Creates a new gameAnswer entity.
      *
-     * @Route("/new", name="gameanswer_new")
+     * @Route("/{id}/new", name="gameanswer_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Game $game)
     {
         $gameAnswer = new Gameanswer();
         $form = $this->createForm('AppPhotoBundle\Form\GameAnswerType', $gameAnswer);
+        $form->remove('game')->remove('user');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+			$gameAnswer->setGame($game)->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($gameAnswer);
             $em->flush($gameAnswer);
@@ -52,7 +55,7 @@ class GameAnswerController extends Controller
             return $this->redirectToRoute('gameanswer_show', array('id' => $gameAnswer->getId()));
         }
 
-        return $this->render('gameanswer/new.html.twig', array(
+        return $this->render('@AppPhoto/gameanswer/new.html.twig', array(
             'gameAnswer' => $gameAnswer,
             'form' => $form->createView(),
         ));
@@ -68,7 +71,7 @@ class GameAnswerController extends Controller
     {
         $deleteForm = $this->createDeleteForm($gameAnswer);
 
-        return $this->render('gameanswer/show.html.twig', array(
+        return $this->render('@AppPhoto/gameanswer/show.html.twig', array(
             'gameAnswer' => $gameAnswer,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -92,7 +95,7 @@ class GameAnswerController extends Controller
             return $this->redirectToRoute('gameanswer_edit', array('id' => $gameAnswer->getId()));
         }
 
-        return $this->render('gameanswer/edit.html.twig', array(
+        return $this->render('@AppPhoto/gameanswer/edit.html.twig', array(
             'gameAnswer' => $gameAnswer,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

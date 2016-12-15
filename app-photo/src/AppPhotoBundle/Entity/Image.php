@@ -32,9 +32,9 @@ class Image
     /**
      * @var string
      *
-     * @ORM\Column(name="coment", type="string", length=255)
+     * @ORM\Column(name="comment", type="string", length=255)
      */
-    private $coment;
+    private $comment;
 
     /**
      * @var string
@@ -54,28 +54,6 @@ class Image
         return $this->id;
     }
 
-    /**
-     * Set coment
-     *
-     * @param string $coment
-     * @return Image
-     */
-    public function setComent($coment)
-    {
-        $this->coment = $coment;
-
-        return $this;
-    }
-
-    /**
-     * Get coment
-     *
-     * @return string 
-     */
-    public function getComent()
-    {
-        return $this->coment;
-    }
 
     /**
      * Set path
@@ -98,5 +76,29 @@ class Image
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     *
+     * @return Image
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

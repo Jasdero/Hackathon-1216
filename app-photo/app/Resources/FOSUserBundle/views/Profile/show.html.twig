@@ -9,4 +9,5 @@
 		{% endif %}
 	</h1>
 {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+	<a href="{{ path('game_new', { id: user.id }) }}"><b>Create a new game</b></a>
 {% endblock fos_user_content %}
