@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
+use AppPhotoBundle\Entity\User;
+
 
 class DefaultController extends Controller
 {
@@ -30,13 +33,28 @@ class DefaultController extends Controller
      *
      */
 
-    public function profilAction()
+    public function profilAction(Request $request)
     {
         $user = $this->getUser();
 
+        $editForm = $this->createForm('AppPhotoBundle\Form\UserType', $user);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('profil');
+        }
+
         return $this->render('@AppPhoto/Default/profil.html.twig', array(
             'user' => $user,
+            'edit_form' => $editForm->createView(),
         ));
+    }
+
+    public function editProfileAction(Request $request, User $user)
+    {
+
     }
 
 }
