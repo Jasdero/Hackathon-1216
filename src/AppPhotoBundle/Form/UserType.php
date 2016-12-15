@@ -22,6 +22,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, array('label'=>false))
+			->add('picture', ImageType::class)
         ;
     }
 

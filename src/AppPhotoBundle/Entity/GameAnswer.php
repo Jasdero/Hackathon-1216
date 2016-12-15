@@ -16,8 +16,8 @@ class GameAnswer
 		return "Answer to the game #" . strval($this->id) . " proposed by " . strval($this->user);
 	}
 	/**
-	 * Many GameAnswer have One image.
-	 * @ORM\ManyToOne(targetEntity="Image", cascade={"persist", "remove"})
+	 * One GameAnswer have One image.
+	 * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
 	 * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
 	 */
 	private $image;

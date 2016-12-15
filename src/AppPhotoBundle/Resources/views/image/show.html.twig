@@ -10,12 +10,12 @@
                 <td>{{ image.id }}</td>
             </tr>
             <tr>
-                <th>Coment</th>
-                <td>{{ image.coment }}</td>
+                <th>Comment</th>
+                <td>{{ image.comment }}</td>
             </tr>
             <tr>
-                <th>Path</th>
-                <td>{{ image.path }}</td>
+                <th>image</th>
+                <td><img src="{{ asset('uploads/images/medias/' ~ image.image) }}" alt="{{ image.comment }}"></td>
             </tr>
         </tbody>
     </table>
