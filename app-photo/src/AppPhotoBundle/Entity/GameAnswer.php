@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class GameAnswer
 {
+	public function __toString() {
+		return "Answer to the game #" . strval($this->id) . " proposed by " . strval($this->user);
+	}
 	/**
 	 * Many GameAnswer have One image.
 	 * @ORM\ManyToOne(targetEntity="Image", cascade={"persist", "remove"})

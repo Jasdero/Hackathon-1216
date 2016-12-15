@@ -23,4 +23,19 @@ class DefaultController extends Controller
 		));
     }
 
+
+    /**
+     * @Route("/profil", name="profil")
+     *
+     */
+
+    public function profilAction()
+    {
+        $user = $this->getUser();
+
+        return $this->render('@AppPhoto/Default/profil.html.twig', array(
+            'user' => $user,
+        ));
+    }
+
 }

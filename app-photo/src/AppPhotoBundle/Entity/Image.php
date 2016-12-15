@@ -19,6 +19,10 @@ class Image
 	 * TODO: Code here <3
 	 */
 
+	public function __toString() {
+		return "[Image]";
+	}
+
 	////////////////////
 	// Generated code //
 	////////////////////
@@ -132,5 +136,5 @@ class Image
     {
         return $this->comment;
     }
-
+    
 }
