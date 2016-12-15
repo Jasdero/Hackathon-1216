@@ -5,6 +5,7 @@ namespace AppPhotoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class DefaultController extends Controller
 {
@@ -12,12 +13,20 @@ class DefaultController extends Controller
      * @Route("/", name="default")
 	 * Redirects to user page if the user is signed in, register otherwise
      */
-    public function indexAction()
+/*    public function indexAction()
     {
 		$user = $this->getUser();
 		if (!is_object($user) || !$user instanceof UserInterface) {
 			throw new AccessDeniedException('This user does not have access to this section.');
 		}
 		return $this->redirectToRoute('fos_user_profile_show');
+    }*/
+
+    /**
+     * @Route("/test", name="test")
+     */
+    public function testAction()
+    {
+        return $this->render('AppPhotoBundle:Default:test.html.twig');
     }
 }
