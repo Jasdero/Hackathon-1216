@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\File;
 
 class DefaultController extends Controller
 {
@@ -36,7 +37,35 @@ class DefaultController extends Controller
     {
         $user = $this->getUser();
 
+
+
         $editForm = $this->createForm('AppPhotoBundle\Form\UserType', $user);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('profil');
+        }
+
+        return $this->render('@AppPhoto/Default/profil.html.twig', array(
+            'user' => $user,
+            'edit_form' => $editForm->createView(),
+        ));
+    }
+
+
+    /**
+     * @Route("/edit/avatar", name="editAvatar")
+     *
+     */
+
+    public function profilAvatarAction(Request $request)
+    {
+        $user = $this->getUser();
+
+
+
+        $editForm = $this->createForm('AppPhotoBundle\Form\UserPhotoType', $user);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -54,11 +83,12 @@ class DefaultController extends Controller
             return $this->redirectToRoute('profil');
         }
 
-        return $this->render('@AppPhoto/Default/profil.html.twig', array(
+        return $this->render('@AppPhoto/Default/editPhoto.html.twig', array(
             'user' => $user,
             'edit_form' => $editForm->createView(),
         ));
     }
+
 
     public function headerAction()
     {
