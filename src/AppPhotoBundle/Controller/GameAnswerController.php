@@ -48,6 +48,8 @@ class GameAnswerController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 			$gameAnswer->setGame($game)->setUser($this->getUser());
+			// On envoie la notification de réponse au game leader
+			$game->answerNotice($this);
             $em = $this->getDoctrine()->getManager();
             $em->persist($gameAnswer);
             $em->flush($gameAnswer);

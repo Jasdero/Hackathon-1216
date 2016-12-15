@@ -14,6 +14,10 @@ class Game
 	public function __toString() {
 		return "Game #" . $this->id . "\t by " . strval($this->leader);
 	}
+
+	public function answerNotice(GameAnswer $gameAnswer) {
+		// TODO: Ajouter le bundle des notifications du leader ici
+	}
 	/**
 	 * One Game has One Leader.
 	 * @ORM\ManyToOne(targetEntity="User", inversedBy="leadedGames")
