@@ -8,6 +8,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    app.path.product_images: /uploads/images/medias
 
 framework:
     #esi:             ~
@@ -71,3 +72,27 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: AppPhotoBundle\Entity\User
+
+# app/config/config.yml
+easy_admin:
+    entities:
+        User:
+            class: AppPhotoBundle\Entity\User
+        Image:
+            class: AppPhotoBundle\Entity\Image
+            list:
+                fields:
+                    - { property: 'image', type: 'image', base_path: %app.path.product_images% }
+            show:
+                fields:
+                    - { property: 'image', type: 'image', base_path: %app.path.product_images% }
+            form:
+                fields:
+                    - { property: 'imageFile', type: 'vich_image' }
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+            product_images:
+                uri_prefix:         %app.path.product_images%
+                upload_destination: %kernel.root_dir%/../web/uploads/images/medias

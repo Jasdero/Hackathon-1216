@@ -3,12 +3,15 @@
 namespace AppPhotoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Image
  *
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="AppPhotoBundle\Repository\ImageRepository")
+ * @Vich\Uploadable
  */
 class Image
 {
@@ -30,19 +33,66 @@ class Image
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
      * @var string
-     *
-     * @ORM\Column(name="coment", type="string", length=255)
      */
-    private $coment;
+    private $image;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="path", type="string", length=255)
+     * @Vich\UploadableField(mapping="product_images", fileNameProperty="image")
+     * @var File
      */
-    private $path;
+    private $imageFile;
 
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    public function setImageFile (File $image = null)
+    {
+        $this->imageFile = $image;
+
+        //VERY IMPORTANT:
+        //It is required that at least one file changes if you are using Doctrine,
+        //otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            //if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
 
     /**
      * Get id
@@ -54,49 +104,4 @@ class Image
         return $this->id;
     }
 
-    /**
-     * Set coment
-     *
-     * @param string $coment
-     * @return Image
-     */
-    public function setComent($coment)
-    {
-        $this->coment = $coment;
-
-        return $this;
-    }
-
-    /**
-     * Get coment
-     *
-     * @return string 
-     */
-    public function getComent()
-    {
-        return $this->coment;
-    }
-
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return Image
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * Get path
-     *
-     * @return string 
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
 }

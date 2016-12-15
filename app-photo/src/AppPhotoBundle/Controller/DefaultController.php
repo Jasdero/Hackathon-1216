@@ -14,4 +14,5 @@ class DefaultController extends Controller
     {
         return $this->render('AppPhotoBundle:Default:index.html.twig');
     }
+
 }
