@@ -7,12 +7,12 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
     app.path.product_images: /uploads/images/medias
 
 framework:
     #esi:             ~
-    translator:      ~
+    translator:       ~ 
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -73,7 +73,6 @@ fos_user:
     firewall_name: main
     user_class: AppPhotoBundle\Entity\User
 
-# app/config/config.yml
 easy_admin:
     entities:
         User:
@@ -82,7 +81,7 @@ easy_admin:
             class: AppPhotoBundle\Entity\Image
             list:
                 fields:
-                    - { property: 'image', type: 'image', base_path: %app.path.product_images% }
+                - { property: 'image', type: 'image', base_path: %app.path.product_images% }
             show:
                 fields:
                     - { property: 'image', type: 'image', base_path: %app.path.product_images% }
@@ -94,6 +93,6 @@ vich_uploader:
     db_driver: orm
     mappings:
             product_images:
-                uri_prefix:         %app.path.product_images%
+                uri_prefix: %app.path.product_images%
                 upload_destination: %kernel.root_dir%/../web/uploads/images/medias
-                namer:              vich_uploader.namer_uniqid
+                namer: vich_uploader.namer_uniqid

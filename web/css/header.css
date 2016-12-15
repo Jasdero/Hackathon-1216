@@ -9,6 +9,10 @@ body{
     text-transform: capitalize;
 }
 
+.formulaire{
+    text-align: center;
+}
+
 .viewtop{
     padding-top: 5px;
     text-align: center;

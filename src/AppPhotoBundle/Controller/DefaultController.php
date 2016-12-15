@@ -5,7 +5,8 @@ namespace AppPhotoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
+
 class DefaultController extends Controller
 {
     /**
@@ -26,16 +27,36 @@ class DefaultController extends Controller
 
     /**
      * @Route("/profil", name="profil")
-     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
 
-    public function profilAction()
+
+    public function profilAction(Request $request)
     {
         $user = $this->getUser();
 
+        $editForm = $this->createForm('AppPhotoBundle\Form\UserType', $user);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('profil');
+        }
+
         return $this->render('@AppPhoto/Default/profil.html.twig', array(
             'user' => $user,
+            'edit_form' => $editForm->createView(),
         ));
     }
+    /**
+     * @Route("/index", name="index")
+     *
+     */
+    public function baseAction()
+    {
+        return $this->render('@AppPhoto/Default/index.html.twig');
+    }
 
-}
+    }
