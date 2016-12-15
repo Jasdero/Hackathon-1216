@@ -5,11 +5,12 @@ span > #rating{
 body{
     background-color: rgba(15, 31, 61, 0.7);
 }
-
-#points{
-    margin-top: 5%;
+#pseudo{
+    text-transform: capitalize;
 }
 
 .viewtop{
     padding-top: 5px;
+    text-align: center;
 }
+

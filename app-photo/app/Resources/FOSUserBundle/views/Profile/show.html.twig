@@ -1,6 +1,12 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-	<h1>Showing profile</h1>
+	<h1>Profile of
+		{% if user is defined %}
+			{{ user.username }}
+		{% else %}
+			Unknown user
+		{% endif %}
+	</h1>
 {% include "FOSUserBundle:Profile:show_content.html.twig" %}
 {% endblock fos_user_content %}
