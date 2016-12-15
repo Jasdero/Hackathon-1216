@@ -96,3 +96,4 @@ vich_uploader:
             product_images:
                 uri_prefix:         %app.path.product_images%
                 upload_destination: %kernel.root_dir%/../web/uploads/images/medias
+                namer:              vich_uploader.namer_uniqid

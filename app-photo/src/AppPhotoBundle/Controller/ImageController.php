@@ -5,7 +5,9 @@ namespace AppPhotoBundle\Controller;
 use AppPhotoBundle\Entity\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Vich\UploaderBundle\Naming\NamerInterface;
 
 /**
  * Image controller.
@@ -44,6 +46,13 @@ class ImageController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $image->getImage();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $image->setImage($fileName);
+            $file->move(
+                $this->getParameter('app.path.product_images'),
+                $fileName
+            );
             $em = $this->getDoctrine()->getManager();
             $em->persist($image);
             $em->flush($image);
