@@ -2,12 +2,9 @@
 {% block body %}
 <style>
 .back {
-	background-image: url('http://img1.mxstatic.com/wallpapers/6907927663dd5d90c6299198288275c4_large.jpeg');
 }
 </style>
-
-<body class="back">
-<div class="container-fluid" style="margin-top: 15px;">
+<div class="container-fluid">
 
 		
 		<div class="row">
@@ -33,10 +30,10 @@
 			<div class="row">
 				<center>
 					<div class="col-xs-4">
-						<a title="Profil" href="#"><i class="fa fa-users fa-3x" aria-hidden="true"></i></a>
+						<a title="Profil" href="{{ path('profil') }}"><i class="fa fa-users fa-3x" aria-hidden="true"></i></a>
 					</div>
 						<div class="col-xs-4">
-							<a title="Créer une partie" href="#"><i class="fa fa-plus fa-3x" aria-hidden="true"></i>	</a>
+							<a title="Créer une partie" href="#"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></a>
 						</div>
 					<div class="col-xs-4">
 						<a title="Classement" href="#"><i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i></a>
