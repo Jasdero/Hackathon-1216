@@ -1,22 +1,14 @@
 {% extends 'AppPhotoBundle:Default:frontLayout.html.twig' %}
 
 {% block body %}
+   
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-offset-4 col-xs-5">
-                <a href=""><button>Jeux où je<br>
-                        suis meneur</button>
-                </a>
-            </div>
-        </div>
-    </div>
-{{ dump(user) }}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-offset-4 col-xs-5">
-
-
-
+        <div class="row formulaire">
+            <div class="col-xs-offset-2 col-xs-8 col-xs-offset-2">
+                {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
+                <input type="submit" value="Modifier" />
+                {{ form_end(edit_form) }}
             </div>
         </div>
     </div>
