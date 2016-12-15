@@ -17,21 +17,21 @@ class GameAnswer
 	 * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
 	 * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
 	 */
-	protected $image;
+	private $image;
 
 	/**
 	 * Many GameAnswer have One User.
-	 * @ORM\ManyToOne(targetEntity="User", inversedBy="answers")
+	 * @ORM\ManyToOne(targetEntity="User", inversedBy="propositions")
 	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
 	 */
-	protected $user;
+	private $user;
 
 	/**
 	 * Many GameAnswer have One Game.
-	 * @ORM\ManyToOne(targetEntity="Game", inversedBy="answers")
+	 * @ORM\ManyToOne(targetEntity="Game", inversedBy="propositions")
 	 * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
 	 */
-	protected $game;
+	private $game;
 
 	////////////////////
 	// Generated code //
