@@ -14,23 +14,24 @@ class User extends BaseUser
 {
 	/**
 	 * One User has Many Games he leads.
-	 * @ORM\OneToMany(targetEntity="Game", mappedBy="leader")
+	 * @ORM\OneToMany(targetEntity="Game", mappedBy="leader", cascade={"remove"})
 	 */
-	protected $leadedGames;
+	private $leadedGames;
 
 	/**
 	 * Many Users have Many played games.
-	 * @ORM\ManyToMany(targetEntity="Game", inversedBy="playingUsers")
+	 * @ORM\ManyToMany(targetEntity="Game", inversedBy="players")
 	 * @ORM\JoinTable(name="users_games")
 	 */
-	protected $playedGames;
-
+	private $playedGames;
 
 	/**
 	 * One User has Many GameAnswer.
 	 * @ORM\OneToMany(targetEntity="GameAnswer", mappedBy="user")
 	 */
-	protected $propositions;
+	private $propositions;
+
+	private $score;
 
 	////////////////////
 	// Generated code //
@@ -46,7 +47,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->score = 0;
     }
 
     /**
