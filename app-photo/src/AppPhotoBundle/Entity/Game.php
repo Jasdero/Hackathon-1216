@@ -3,7 +3,6 @@
 namespace AppPhotoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Game
  *
@@ -12,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Game
 {
+	public function __toString() {
+		return "Game #" . $this->id . "\t by " . strval($this->leader);
+	}
 	/**
 	 * One Game has One Leader.
 	 * @ORM\ManyToOne(targetEntity="User", inversedBy="leadedGames")

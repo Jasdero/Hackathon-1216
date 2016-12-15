@@ -3,6 +3,7 @@
 namespace AppPhotoBundle\Controller;
 
 use AppPhotoBundle\Entity\Game;
+use AppPhotoBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -41,9 +42,11 @@ class GameController extends Controller
     {
         $game = new Game();
         $form = $this->createForm('AppPhotoBundle\Form\GameType', $game);
+		$form->remove('leader');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+			$game->setLeader($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($game);
             $em->flush($game);

@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+	public function __toString() {
+		return $this->username;
+	}
 	/**
 	 * One User has Many Games he leads.
 	 * @ORM\OneToMany(targetEntity="Game", mappedBy="leader", cascade={"remove"})
@@ -30,6 +33,11 @@ class User extends BaseUser
 	 * @ORM\OneToMany(targetEntity="GameAnswer", mappedBy="user")
 	 */
 	private $propositions;
+
+    /**
+     * @var integer
+     * @ORM\Column(name= "score", type="integer")
+     */
 
 	private $score;
 
@@ -150,5 +158,29 @@ class User extends BaseUser
     public function getPropositions()
     {
         return $this->propositions;
+    }
+
+    /**
+     * Set score
+     *
+     * @param integer $score
+     *
+     * @return User
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer
+     */
+    public function getScore()
+    {
+        return $this->score;
     }
 }

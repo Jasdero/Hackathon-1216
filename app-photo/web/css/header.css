@@ -1,0 +1,16 @@
+span > #rating{
+    margin-top: 10%;
+}
+
+body{
+    background-color: rgba(15, 31, 61, 0.7);
+}
+#pseudo{
+    text-transform: capitalize;
+}
+
+.viewtop{
+    padding-top: 5px;
+    text-align: center;
+}
+
