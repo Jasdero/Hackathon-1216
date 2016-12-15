@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	AppPhoto: Home page
+{% endblock %}
+{% block body %}
+	<h1>Wesh Bien ou bien ma gueule ?</h1>
+	<a href="{{ path('default') }}">
+		<button> Pointless button <br> (Warning: Pointless!) </button>
+	</a>
+	<a href="{{ path('fos_user_registration_register') }}">
+		<button>Register</button>
+	</a>
+	<a href="{{ path('fos_user_security_login') }}">
+		<button>Login</button>
+	</a>
+{% endblock %}

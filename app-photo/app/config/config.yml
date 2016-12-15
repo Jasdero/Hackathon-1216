@@ -2,15 +2,17 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@AppPhotoBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    app.path.product_images: /uploads/images/medias
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      ~
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -64,3 +66,34 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# app/config/config.yml
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: AppPhotoBundle\Entity\User
+
+# app/config/config.yml
+easy_admin:
+    entities:
+        User:
+            class: AppPhotoBundle\Entity\User
+        Image:
+            class: AppPhotoBundle\Entity\Image
+            list:
+                fields:
+                    - { property: 'image', type: 'image', base_path: %app.path.product_images% }
+            show:
+                fields:
+                    - { property: 'image', type: 'image', base_path: %app.path.product_images% }
+            form:
+                fields:
+                    - { property: 'imageFile', type: 'vich_image' }
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+            product_images:
+                uri_prefix:         %app.path.product_images%
+                upload_destination: %kernel.root_dir%/../web/uploads/images/medias
+                namer:              vich_uploader.namer_uniqid
