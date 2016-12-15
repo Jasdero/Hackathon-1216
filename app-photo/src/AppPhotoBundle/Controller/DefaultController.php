@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 class DefaultController extends Controller
 {
     /**
@@ -22,4 +23,20 @@ class DefaultController extends Controller
 			'user' => $user,
 		));
     }
+
+
+    /**
+     * @Route("/profil", name="profil")
+     *
+     */
+
+    public function profilAction()
+    {
+        $user = $this->getUser();
+
+        return $this->render('@AppPhoto/Default/profil.html.twig', array(
+            'user' => $user,
+        ));
+    }
+
 }

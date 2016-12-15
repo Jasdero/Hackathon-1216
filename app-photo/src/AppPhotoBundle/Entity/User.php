@@ -34,6 +34,11 @@ class User extends BaseUser
 	 */
 	private $propositions;
 
+    /**
+     * @var integer
+     * @ORM\Column(name= "score", type="integer")
+     */
+
 	private $score;
 
 	////////////////////
@@ -153,5 +158,29 @@ class User extends BaseUser
     public function getPropositions()
     {
         return $this->propositions;
+    }
+
+    /**
+     * Set score
+     *
+     * @param integer $score
+     *
+     * @return User
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer
+     */
+    public function getScore()
+    {
+        return $this->score;
     }
 }
