@@ -5,8 +5,7 @@ namespace AppPhotoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\BrowserKit\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -32,9 +31,11 @@ class DefaultController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
 
+
     public function profilAction(Request $request)
     {
         $user = $this->getUser();
+
         $editForm = $this->createForm('AppPhotoBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
 
@@ -49,5 +50,4 @@ class DefaultController extends Controller
             'edit_form' => $editForm->createView(),
         ));
     }
-
-}
+    }
