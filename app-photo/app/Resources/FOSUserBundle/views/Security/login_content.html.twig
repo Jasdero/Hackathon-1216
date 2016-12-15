@@ -1,12 +1,14 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<link rel="stylesheet" href="{{ asset('css/login.css') }}" />
- <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.css') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
+
+
 <style>
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
@@ -78,7 +80,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
 
 <div class="login">
-    <h1>Login</h1>
+    <h1>Connexion</h1>
 <form action="{{ path("fos_user_security_check") }}" method="post">
 
     {% if csrf_token %}
