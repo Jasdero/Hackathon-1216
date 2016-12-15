@@ -2,6 +2,8 @@
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle;
+use Vich\UploaderBundle\VichUploaderBundle;
 
 class AppKernel extends Kernel
 {
