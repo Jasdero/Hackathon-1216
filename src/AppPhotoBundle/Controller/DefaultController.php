@@ -17,11 +17,11 @@ class DefaultController extends Controller
     {
 		$user = $this->getUser();
 		if (is_object($user) && $user instanceof UserInterface) {
-			return $this->redirectToRoute('fos_user_profile_show');
+			return $this->redirectToRoute('index', array(
+                'user' => $user,
+            ));
 		}
-		return $this->render('@AppPhoto/Default/index.html.twig', array(
-			'user' => $user,
-		));
+		return $this->redirectToRoute('fos_user_security_login');
     }
 
 
