@@ -18,6 +18,7 @@ class Game
 	public function answerNotice(GameAnswer $gameAnswer) {
 		// TODO: Ajouter le bundle des notifications du leader ici
 	}
+
 	/**
 	 * One Game has One Leader.
 	 * @ORM\ManyToOne(targetEntity="User", inversedBy="leadedGames")

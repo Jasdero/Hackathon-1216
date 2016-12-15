@@ -15,6 +15,13 @@ class User extends BaseUser
 	public function __toString() {
 		return $this->username;
 	}
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->score = 0;
+	}
+
 	/**
 	 * One User has Many Games he leads.
 	 * @ORM\OneToMany(targetEntity="Game", mappedBy="leader", cascade={"remove"})
@@ -52,11 +59,6 @@ class User extends BaseUser
      */
     protected $id;
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->score = 0;
-    }
 
     /**
      * Add leadedGame
