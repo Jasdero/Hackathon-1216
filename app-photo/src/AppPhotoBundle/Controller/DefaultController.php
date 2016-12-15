@@ -13,7 +13,7 @@ class DefaultController extends Controller
      * @Route("/", name="default")
 	 * Redirects to user page if the user is signed in, register otherwise
      */
-/*    public function indexAction()
+   /* public function indexAction()
     {
 		$user = $this->getUser();
 		if (!is_object($user) || !$user instanceof UserInterface) {
@@ -23,10 +23,10 @@ class DefaultController extends Controller
     }*/
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/profil", name="profil")
      */
     public function testAction()
     {
-        return $this->render('AppPhotoBundle:Default:test.html.twig');
+        return $this->render('AppPhotoBundle:Default:profil.html.twig');
     }
 }
