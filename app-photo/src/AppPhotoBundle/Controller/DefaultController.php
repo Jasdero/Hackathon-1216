@@ -27,6 +27,17 @@ class DefaultController extends Controller
      */
     public function testAction()
     {
+
         return $this->render('AppPhotoBundle:Default:profil.html.twig');
+    }
+
+    /**
+     * @Route("/", name="home")
+     */
+    public function homeAction()
+    {
+
+
+        return $this->render('AppPhotoBundle:Default:index.html.twig');
     }
 }

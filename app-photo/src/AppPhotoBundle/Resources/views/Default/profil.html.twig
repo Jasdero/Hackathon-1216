@@ -1,11 +1,28 @@
 {% extends 'AppPhotoBundle:Default:frontLayout.html.twig' %}
 
 {% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-offset-4 col-xs-5">
+                <a href=""><button>Jeux où je<br>
+                        suis meneur</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-offset-4 col-xs-5">
+                {{ render(controller) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block footer %}
     <div class="col-xs-4">
             <span>
-                <i class="fa fa-inverse fa-chevron-left fa-4x"></i>
+                <a href="{{ path('home') }}"><i class="fa fa-inverse fa-chevron-left fa-3x"></i></a>
             </span>
     </div>
 {% endblock %}
