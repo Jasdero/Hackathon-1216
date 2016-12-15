@@ -3,16 +3,24 @@
 namespace AppPhotoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="default")
+	 * Redirects to user page if the user is signed in, register otherwise
      */
     public function indexAction()
     {
-        return $this->render('AppPhotoBundle:Default:index.html.twig');
+		$user = $this->getUser();
+		if (is_object($user) && $user instanceof UserInterface) {
+			return $this->redirectToRoute('fos_user_profile_show');
+		}
+		return $this->render('@AppPhoto/Default/index.html.twig', array(
+			'user' => $user,
+		));
     }
 
 }

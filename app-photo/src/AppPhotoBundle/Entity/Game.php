@@ -14,10 +14,16 @@ class Game
 {
 	/**
 	 * One Game has One Leader.
-	 * @ORM\OneToOne(targetEntity="User")
+	 * @ORM\ManyToOne(targetEntity="User", inversedBy="leadedGames")
 	 * @ORM\JoinColumn(name="leader_id", referencedColumnName="id")
 	 */
 	private $leader;
+
+	/**
+	 * Many Game has Many playing Users.
+	 * @ORM\ManyToMany(targetEntity="User", mappedBy="playedGames")
+	 */
+	private $players;
 
 	/**
 	 * One Game has One To guess Image.
@@ -28,7 +34,7 @@ class Game
 
 	/**
 	 * One Game has Many GameAnswer.
-	 * @ORM\OneToMany(targetEntity="GameAnswer", mappedBy="game")
+	 * @ORM\OneToMany(targetEntity="GameAnswer", mappedBy="game", cascade={"remove"})
 	 */
 	private $propositions;
 
@@ -143,5 +149,39 @@ class Game
     public function getPropositions()
     {
         return $this->propositions;
+    }
+
+    /**
+     * Add player
+     *
+     * @param \AppPhotoBundle\Entity\User $player
+     *
+     * @return Game
+     */
+    public function addPlayer(\AppPhotoBundle\Entity\User $player)
+    {
+        $this->players[] = $player;
+
+        return $this;
+    }
+
+    /**
+     * Remove player
+     *
+     * @param \AppPhotoBundle\Entity\User $player
+     */
+    public function removePlayer(\AppPhotoBundle\Entity\User $player)
+    {
+        $this->players->removeElement($player);
+    }
+
+    /**
+     * Get players
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlayers()
+    {
+        return $this->players;
     }
 }

@@ -1,38 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
-    {% block head %}
+    <head>
         <meta charset="UTF-8" />
-    {% endblock %}
-
-    {% block title %}
-        <title>CATCH ME IF U CAN</title>
-    {% endblock %}
-
-    {% block stylesheet %}
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-        <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
-    {% endblock %}
-    {% block JS %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script src="https://use.fontawesome.com/54b98547e1.js"></script>
-        <script src="https://use.fontawesome.com/54b98547e1.js"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    {% endblock %}
-
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
-<body>
-{% block body %}
-
-    {% block header %}
-    {% endblock %}
-
-    {% block content %}
-    {% endblock %}
-
-    {% block footer %}
-    {% endblock %}
-{% endblock %}
-</body>
+        <title>{% block title %}App Photo: Root{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
 </html>
