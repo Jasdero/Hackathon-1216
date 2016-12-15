@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <meta charset="UTF-8" />
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+<head>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <meta charset="UTF-8" /> <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    {% block stylesheet %}{% endblock %}
+    <title>{% block title %}Welcome!{% endblock %}</title>
+</head>
 
-        <title>{% block title %}Welcome!{% endblock %}</title>
-    </head>
-            
-    <body>
+<body>
 
+{% block header %}
+{% endblock %}
 {% block body %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
 
-{% endblock %}    
+</body>
 
-    </body>
-    
 </html>
 

@@ -50,4 +50,13 @@ class DefaultController extends Controller
             'edit_form' => $editForm->createView(),
         ));
     }
+    /**
+     * @Route("/index", name="index")
+     *
+     */
+    public function baseAction()
+    {
+        return $this->render('@AppPhoto/Default/index.html.twig');
+    }
+
     }
