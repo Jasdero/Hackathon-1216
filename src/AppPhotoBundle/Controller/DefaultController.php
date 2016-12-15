@@ -40,6 +40,15 @@ class DefaultController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $user = $editForm->getData();
+            $avatar = $user->getAvatar();
+            $fileName = md5(uniqid()).'.'.$avatar->guessExtension();
+            $avatar->move(
+                $this->getParameter('upload_directory'),
+                $fileName
+            );
+            $user->setAvatar($fileName);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('profil');
@@ -67,4 +76,7 @@ class DefaultController extends Controller
         return $this->render('@AppPhoto/Default/index.html.twig');
     }
 
-    }
+
+
+
+}

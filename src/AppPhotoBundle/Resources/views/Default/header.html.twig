@@ -9,7 +9,7 @@
             <h2>{{ user.username }}</h2>
         </div>
         <div class="col-xs-3 pull-right" id="avatar">
-            <img src="http://placehold.it/350x350" alt="myAvatar" class="img-circle img-responsive">
+            <img src="{{asset ('uploads/images/medias/'~user.avatar) }}" alt="myAvatar" class="img-circle img-responsive">
 
         </div>
     </div>

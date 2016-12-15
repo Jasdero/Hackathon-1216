@@ -41,6 +41,13 @@ class User extends BaseUser
 
 	private $score;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
+     */
+    private $avatar;
+
 	////////////////////
 	// Generated code //
 	////////////////////
@@ -182,5 +189,29 @@ class User extends BaseUser
     public function getScore()
     {
         return $this->score;
+    }
+
+    /**
+     * Set avatar
+     *
+     * @param string $avatar
+     *
+     * @return User
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return string
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
     }
 }
