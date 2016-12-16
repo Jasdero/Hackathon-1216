@@ -1,55 +1,33 @@
-{% extends "base.html.twig"%}
+{% extends 'AppPhotoBundle:Default:frontLayout.html.twig' %}
 {% block body %}
-<style>
-.back {
-	background-image: url('http://img1.mxstatic.com/wallpapers/6907927663dd5d90c6299198288275c4_large.jpeg');
-}
-</style>
-
-<body class="back">
-<div class="container-fluid" style="margin-top: 15px;">
-
-		
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12">
-				<center>
-					<img class="img-circle" style="width:100%;" src="https://images5.alphacoders.com/609/thumb-350-609966.jpg" />
-				</center>
+				<img class="img-circle img-responsive"  src="https://images5.alphacoders.com/609/thumb-350-609966.jpg" />
 			</div>
 		</div>
-		
-<br />
-
+		<br />
 		<div class="row jumbotron">
-				<div class="col-xs-12 " style="text-align: center;">
-					<div style="margin-bottom: 15px;">Postée par : <br />
+			<div class="col-xs-12 " style="text-align: center;">
+				<div style="margin-bottom: 15px;">Postée par : <br />
 					<a href="">machin</a> </div>
-					<button type="button" class="btn btn-primary">Participer</button>
-				</div>
+				<button type="button" class="btn btn-primary">Participer</button>
+			</div>
 		</div>
-
-
 		<footer class="navbar-fixed-bottom" style="margin-bottom:8px">
 			<div class="row">
 				<center>
 					<div class="col-xs-4">
-						<a title="Profil" href="#"><i class="fa fa-users fa-3x" aria-hidden="true"></i></a>
+						<a title="Profil" href="{{ path('profil') }}"><i class="fa fa-users fa-3x" aria-hidden="true"></i></a>
 					</div>
-						<div class="col-xs-4">
-							<a title="Créer une partie" href="#"><i class="fa fa-plus fa-3x" aria-hidden="true"></i>	</a>
-						</div>
+					<div class="col-xs-4">
+						<a title="Créer une partie" href="#"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></a>
+					</div>
 					<div class="col-xs-4">
 						<a title="Classement" href="#"><i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i></a>
 					</div>
 				</center>
 			</div>
 		</footer>
-
-
-</div>
-
-
-
-	
-
+	</div>
 {% endblock %}

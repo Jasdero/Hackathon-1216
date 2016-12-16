@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\File;
 
 class DefaultController extends Controller
 {
@@ -17,11 +18,11 @@ class DefaultController extends Controller
     {
 		$user = $this->getUser();
 		if (is_object($user) && $user instanceof UserInterface) {
-			return $this->redirectToRoute('fos_user_profile_show');
+			return $this->redirectToRoute('index', array(
+                'user' => $user,
+            ));
 		}
-		return $this->render('@AppPhoto/Default/index.html.twig', array(
-			'user' => $user,
-		));
+		return $this->redirectToRoute('fos_user_security_login');
     }
 
 
@@ -36,18 +37,64 @@ class DefaultController extends Controller
     {
         $user = $this->getUser();
 
+
+
         $editForm = $this->createForm('AppPhotoBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('profil');
         }
 
         return $this->render('@AppPhoto/Default/profil.html.twig', array(
             'user' => $user,
             'edit_form' => $editForm->createView(),
+        ));
+    }
+
+
+    /**
+     * @Route("/edit/avatar", name="editAvatar")
+     *
+     */
+
+    public function profilAvatarAction(Request $request)
+    {
+        $user = $this->getUser();
+
+
+
+        $editForm = $this->createForm('AppPhotoBundle\Form\UserPhotoType', $user);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $user = $editForm->getData();
+            $avatar = $user->getAvatar();
+            $fileName = md5(uniqid()).'.'.$avatar->guessExtension();
+            $avatar->move(
+                $this->getParameter('upload_directory'),
+                $fileName
+            );
+            $user->setAvatar($fileName);
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('profil');
+        }
+
+        return $this->render('@AppPhoto/Default/editPhoto.html.twig', array(
+            'user' => $user,
+            'edit_form' => $editForm->createView(),
+        ));
+    }
+
+
+    public function headerAction()
+    {
+        $user = $this->getUser();
+        return $this->render('@AppPhoto/Default/header.html.twig', array(
+            'user' => $user,
         ));
     }
     /**
@@ -59,4 +106,7 @@ class DefaultController extends Controller
         return $this->render('@AppPhoto/Default/index.html.twig');
     }
 
-    }
+
+
+
+}

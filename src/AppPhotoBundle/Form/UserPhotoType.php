@@ -3,10 +3,10 @@
  * Created by PhpStorm.
  * User: julien
  * Date: 15/12/16
- * Time: 15:52
+ * Time: 23:39
  */
-
 namespace AppPhotoBundle\Form;
+
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -14,7 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+
+class UserPhotoType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -22,8 +23,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, array('label'=>false))
-			->add('picture', ImageType::class)
+            ->add('avatar', FileType::class, array('data_class'=>null))
         ;
     }
 
@@ -44,6 +44,5 @@ class UserType extends AbstractType
     {
         return 'appphotobundle_user';
     }
-
 
 }

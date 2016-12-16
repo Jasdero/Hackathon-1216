@@ -12,12 +12,29 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-xs-offset-2 col-xs-8 col-xs-offset-2">
+                <a href="{{ path('editAvatar') }}"><button>Changer mon avatar</button></a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block footer %}
-    <div class="col-xs-4">
+    <div class="navbar-fixed-bottom">
+        <div class="container">
+            <div class="col-xs-4">
             <span>
-               {# <a href="{{ path('home') }}"><i class="fa fa-inverse fa-chevron-left fa-3x"></i></a>#}
+                <a href="{{ path('index') }}"><i class="fa fa-inverse fa-chevron-left fa-3x"></i></a>
             </span>
+            </div>
+            <div class="col-xs-4">
+                <a title="Créer une partie" href="#"><i class="fa fa-plus fa-3x" aria-hidden="true"></i>	</a>
+            </div>
+            <div class="col-xs-4">
+                <a title="Classement" href="#"><i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i></a>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
