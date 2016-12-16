@@ -1,6 +1,6 @@
 {% extends 'AppPhotoBundle:Default:frontLayout.html.twig' %}
 {% block body %}
-    {% for game in games %}
+    {% for game in games if (game.toGuessImage is not null) %}
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12">
