@@ -6,7 +6,8 @@
             </span>
         </div>
         <div class="col-xs-6" id="pseudo">
-            <h2>{{ user.username }}</h2>
+            <h2>{{ user.username }}</h2><br>
+            <a href="{{ path('fos_user_security_logout') }}"><button>logout</button></a>
         </div>
         <div class="col-xs-4 pull-right" id="avatar">
             <img src="{{asset ('uploads/images/medias/'~user.avatar) }}" alt="myAvatar" class="img-circle img-responsive">
