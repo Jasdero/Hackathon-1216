@@ -41,18 +41,20 @@ class GameAnswerController extends Controller
      */
     public function newAction(Request $request, Game $game)
     {
-        $gameAnswer = new Gameanswer();
+        $gameAnswer = new GameAnswer();
         $form = $this->createForm('AppPhotoBundle\Form\GameAnswerType', $gameAnswer);
         $form->remove('game')->remove('user');
         $form->handleRequest($request);
+		$gameAnswer->setGame($game)->setUser($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
-			$gameAnswer->setGame($game)->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($gameAnswer);
+			// On envoie la notification de réponse au game leader
+			$game->answerNotice($gameAnswer);
             $em->flush($gameAnswer);
 
-            return $this->redirectToRoute('gameanswer_show', array('id' => $gameAnswer->getId()));
+            return $this->redirectToRoute('game_index', array('id' => $gameAnswer->getId()));
         }
 
         return $this->render('@AppPhoto/gameanswer/new.html.twig', array(

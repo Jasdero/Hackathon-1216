@@ -7,8 +7,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Coment</th>
-                <th>Path</th>
+                <th>Comment</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,8 +16,8 @@
         {% for image in images %}
             <tr>
                 <td><a href="{{ path('image_show', { 'id': image.id }) }}">{{ image.id }}</a></td>
-                <td>{{ image.coment }}</td>
-                <td>{{ image.path }}</td>
+                <td>{{ image.comment }}</td>
+                <td><img src="{{ asset('uploads/images/medias/' ~ image.image) }}" alt="{{ image.comment }}"></td>
                 <td>
                     <ul>
                         <li>

@@ -7,6 +7,7 @@
         <tbody>
             <tr>
                 <th>Id</th>
+                <td>Image</td>
                 <td>{{ game.id }}</td>
             </tr>
         </tbody>
@@ -14,18 +15,42 @@
 
     <ul>
         <li>
-            <a href="{{ path('game_index') }}">Back to the list</a>
+            <a href="{{ path('game_index') }}">Retour à la liste des jeux</a>
         </li>
         <li>
-            <a href="{{ path('game_edit', { 'id': game.id }) }}">Edit</a>
+            <img src="{{ asset('uploads/images/medias/' ~ game.toGuessImage.image) }}" alt="{{ game.toGuessImage.comment }}">
         </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
+    </ul>
+    {% if is_leader %}
+        <h1>You are the leader</h1>
+        <ul>
+            <li>
+				{% for answer in answers %}
+                    <div>
+                        <p>Solution postée par <strong>{{ answer.user }}</strong> : </p>
+                        <img src="{{ asset('uploads/images/medias/' ~ answer.image.image) }}" alt="{{ answer.image.comment }}">
+
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="{{ path('game_end_turn', {id: answer.id}) }}"><button>Valider la solution</button></a>
+                        </li>
+                        <li>
+                            <button>TODO: Implémenter le rejet des solutions</button>
+                        </li>
+                    </ul>
+				{% endfor %}
+            </li>
+            <li>
+				{{ form_start(delete_form) }}
+                    <input type="submit" value="Supprimer l'image (et la quête)">
+				{{ form_end(delete_form) }}
+            </li>
+        </ul>
+    {% else %}
+        <h1>You are a player</h1>
         <a href="{{ path('gameanswer_new', {id: game.id}) }}">
             <button>Poster une réponse</button>
         </a>
-    </ul>
+    {% endif %}
 {% endblock %}
