@@ -15,7 +15,7 @@ class GameType extends AbstractType
     {
         $builder
 			->add('leader')
-			->add('toGuessImage', ImageType::class)
+			->add('toGuessImage', ImageType::class, array('label' => "Image à trouver"))
 		;
     }
     

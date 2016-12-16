@@ -15,6 +15,7 @@ class GameAnswer
 	public function __toString() {
 		return "Answer to the game #" . strval($this->id) . " proposed by " . strval($this->user);
 	}
+
 	/**
 	 * One GameAnswer have One image.
 	 * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})

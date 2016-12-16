@@ -176,6 +176,20 @@ class User extends BaseUser
         return $this;
     }
 
+	/**
+	 * Add score
+	 *
+	 * @param integer $points
+	 *
+	 * @return User
+	 */
+	public function addScore($points)
+	{
+		$this->score += $points;
+
+		return $this;
+	}
+
     /**
      * Get score
      *

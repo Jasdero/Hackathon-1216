@@ -3,6 +3,7 @@
 namespace AppPhotoBundle\Controller;
 
 use AppPhotoBundle\Entity\Game;
+use AppPhotoBundle\Entity\GameAnswer;
 use AppPhotoBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -16,6 +17,56 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class GameController extends Controller
 {
+	/**
+	 * Validates a GameAnswer and ends a game turn
+	 *
+	 * @Route("/{id}/end_turn", name="game_end_turn")
+	 * @Method({"GET", "POST"})
+	 */
+	public function endTurnAction(Request $request, GameAnswer $gameAnswer)
+	{
+		$game = $gameAnswer->getGame();
+		$em = $this->getDoctrine()->getManager();
+		$game->setLeader($gameAnswer->getUser());
+		$propositions = $game->getPropositions();
+		foreach($propositions as $rejectedAnswer) {
+			unlink($this->container->getParameter('upload_destination').'/'.$rejectedAnswer->getImage());
+			$em->remove($rejectedAnswer);
+			$em->flush($game);
+		}
+		$em->remove($game->getToGuessImage());
+		$em->flush($game->getToGuessImage());
+		return $this->redirectToRoute('game_index', array('id' => $game->getId()));
+
+	}
+
+	/**
+	 * Starts a new game turn (gets a new image from the game leader and increments their points)
+	 *
+	 * @Route("/{id}/start_turn", name="game_start_turn")
+	 * @Method({"GET", "POST"})
+	 */
+	public function startTurnAction(Request $request, Game $game)
+	{
+		$deleteForm = $this->createDeleteForm($game);
+		$editForm = $this->createForm('AppPhotoBundle\Form\GameType', $game);
+		$editForm->remove('leader');
+		$editForm->handleRequest($request);
+
+		if ($editForm->isSubmitted() && $editForm->isValid()) {
+			$game->getLeader()->addScore(1);
+			$this->getDoctrine()->getManager()->flush();
+			return $this->redirectToRoute('game_edit', array('id' => $game->getId()));
+		}
+
+		return $this->render('@AppPhoto/game/edit.html.twig', array(
+			'game' => $game,
+			'edit_form' => $editForm->createView(),
+			'delete_form' => $deleteForm->createView(),
+		));
+
+	}
+
     /**
      * Lists all game entities.
      *
@@ -52,7 +103,9 @@ class GameController extends Controller
             $em->persist($game);
             $em->flush($game);
 
-            return $this->redirectToRoute('game_show', array('id' => $game->getId()));
+            return $this->redirectToRoute('game_show', array(
+            	'id' => $game->getId(),
+			));
         }
 
         return $this->render('@AppPhoto/game/new.html.twig', array(
@@ -70,11 +123,15 @@ class GameController extends Controller
     public function showAction(Game $game)
     {
         $deleteForm = $this->createDeleteForm($game);
-
-        return $this->render('@AppPhoto/game/show.html.twig', array(
-            'game' => $game,
-            'delete_form' => $deleteForm->createView(),
-        ));
+		$isLeader = ($game->getLeader() == $this->getUser());
+		$table = [
+			'game' => $game,
+			'delete_form' => $deleteForm->createView(),
+			'is_leader' => $isLeader,
+		];
+		if ($isLeader)
+			$table['answers'] = $game->getPropositions();
+        return $this->render('@AppPhoto/game/show.html.twig', $table);
     }
 
     /**

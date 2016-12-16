@@ -34,7 +34,7 @@ class Game
 
 	/**
 	 * One Game has One To guess Image.
-	 * @ORM\OneToOne(targetEntity="Image")
+	 * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
 	 * @ORM\JoinColumn(name="to_guess_image_id", referencedColumnName="id")
 	 */
 	private $toGuessImage;
