@@ -9,7 +9,7 @@
                 <td>Image à trouver</td>
         </thead>
         <tbody>
-        {% for game in games %}
+        {% for game in games if (game.toGuessImage is not null) %}
             <tr>
                 <td>
                         <img src="{{ asset('uploads/images/medias/' ~ game.toGuessImage.image) }}" alt="{{ game.toGuessImage.comment }}" class="img-responsive">
