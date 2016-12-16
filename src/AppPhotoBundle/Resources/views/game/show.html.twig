@@ -1,4 +1,5 @@
-{% extends 'base.html.twig' %}
+{% extends 'AppPhotoBundle:Default:frontLayout.html.twig' %}
+
 
 {% block body %}
     <h1>Game</h1>
@@ -6,9 +7,7 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
                 <td>Image</td>
-                <td>{{ game.id }}</td>
             </tr>
         </tbody>
     </table>
@@ -18,7 +17,7 @@
             <a href="{{ path('game_index') }}">Retour à la liste des jeux</a>
         </li>
         <li>
-            <img src="{{ asset('uploads/images/medias/' ~ game.toGuessImage.image) }}" alt="{{ game.toGuessImage.comment }}">
+            <img src="{{ asset('uploads/images/medias/' ~ game.toGuessImage.image) }}" alt="{{ game.toGuessImage.comment }}" class="img-responsive">
         </li>
     </ul>
     {% if is_leader %}
@@ -28,7 +27,7 @@
 				{% for answer in answers %}
                     <div>
                         <p>Solution postée par <strong>{{ answer.user }}</strong> : </p>
-                        <img src="{{ asset('uploads/images/medias/' ~ answer.image.image) }}" alt="{{ answer.image.comment }}">
+                        <img src="{{ asset('uploads/images/medias/' ~ answer.image.image) }}" alt="{{ answer.image.comment }}" class="img-responsive">
 
                     </div>
                     <ul>
