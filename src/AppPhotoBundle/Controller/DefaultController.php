@@ -67,4 +67,13 @@ class DefaultController extends Controller
         return $this->render('@AppPhoto/Default/index.html.twig');
     }
 
+    /**
+     * @Route("/classement", name="classement")
+     *
+     */
+    public function classementAction()
+    {
+        return $this->render('@AppPhoto/Default/classement.html.twig');
+    }
+
     }
