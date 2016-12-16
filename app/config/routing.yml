@@ -11,4 +11,4 @@ fos_user:
 easy_admin_bundle:
     resource: "@EasyAdminBundle/Controller/"
     type:     annotation
-    prefix:   /index
+    prefix:   /admin
