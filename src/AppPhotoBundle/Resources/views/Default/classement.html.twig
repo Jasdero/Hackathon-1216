@@ -6,7 +6,7 @@
         <div class="col-xs-offset-2 col-xs-8 col-xs-offset-2">
             <ol>
                 {% for user in users %}
-                    <li>{{ user.username }}{{ user.score }}</li>
+                    <li class="classements">{{ user.username }} {{ user.score }} pts</li>
                 {% endfor %}
             </ol>
         </div>
