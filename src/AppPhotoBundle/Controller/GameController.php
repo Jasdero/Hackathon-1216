@@ -20,22 +20,24 @@ class GameController extends Controller
 	/**
 	 * Validates a GameAnswer and ends a game turn
 	 *
-	 * @Route("/{id}/end_turn", name="game_end_turn")
+	 * @Route("/{id}/{username}/end_turn", name="game_end_turn")
 	 * @Method({"GET", "POST"})
 	 */
-	public function endTurnAction(Request $request, GameAnswer $gameAnswer)
+	public function endTurnAction(Request $request, Game $game, User $winner)
 	{
-		$game = $gameAnswer->getGame();
+		//$game = $gameAnswer->getGame();
 		$em = $this->getDoctrine()->getManager();
-		$game->setLeader($gameAnswer->getUser());
+		$game->setLeader($winner);
 		$propositions = $game->getPropositions();
 		foreach($propositions as $rejectedAnswer) {
-			unlink($this->container->getParameter('upload_destination').'/'.$rejectedAnswer->getImage());
+			unlink($this->container->getParameter('upload_directory').$rejectedAnswer->getImage()->getImage());
 			$em->remove($rejectedAnswer);
 			$em->flush($game);
 		}
-		$em->remove($game->getToGuessImage());
-		$em->flush($game->getToGuessImage());
+		$initialImage = $game->getToGuessImage();
+		unlink($this->container->getParameter('upload_directory').$initialImage->getImage());
+		$em->remove($initialImage);
+		$em->flush($initialImage);
 		return $this->redirectToRoute('game_index', array('id' => $game->getId()));
 
 	}
@@ -123,11 +125,13 @@ class GameController extends Controller
     public function showAction(Game $game)
     {
         $deleteForm = $this->createDeleteForm($game);
-		$isLeader = ($game->getLeader() == $this->getUser());
+        $user = $this->getUser();
+		$isLeader = ($game->getLeader() == $user);
 		$table = [
 			'game' => $game,
 			'delete_form' => $deleteForm->createView(),
 			'is_leader' => $isLeader,
+			'user' => $user,
 		];
 		if ($isLeader)
 			$table['answers'] = $game->getPropositions();
