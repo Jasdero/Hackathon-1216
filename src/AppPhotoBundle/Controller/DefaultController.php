@@ -106,6 +106,19 @@ class DefaultController extends Controller
         return $this->render('@AppPhoto/Default/index.html.twig');
     }
 
+    /**
+     * @Route("/classement", name="classement")
+     *
+     */
+    public function classementAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('AppPhotoBundle:User')->findBy(array(), array('score'=>'DESC'));
+        return $this->render('@AppPhoto/Default/classement.html.twig', array('users'=>$users));
+    }
+
+
+
 
 
 
