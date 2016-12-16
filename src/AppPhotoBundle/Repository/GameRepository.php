@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class GameRepository extends EntityRepository
 {
+    public function findAllActive() {
+        $qb = $this->createQueryBuilder('g');
+        $qb->where('g.toGuessImage <> :value')
+            ->setParameter('value', null);
+        return $qb->getQuery()
+            ->getResult();
+    }
 }

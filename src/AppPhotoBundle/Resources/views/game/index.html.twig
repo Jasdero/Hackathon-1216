@@ -10,7 +10,7 @@
                 <td>Image à trouver</td>
         </thead>
         <tbody>
-        {% for game in games %}
+        {% for game in games if (game.toGuessImage is not null) %}
             <tr>
                 <td><a href="{{ path('game_show', { 'id': game.id }) }}">{{ game.id }}</a></td>
                 <td>

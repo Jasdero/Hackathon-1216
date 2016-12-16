@@ -20,21 +20,24 @@ class GameController extends Controller
 	/**
 	 * Validates a GameAnswer and ends a game turn
 	 *
-	 * @Route("/{id}/{username}/end_turn", name="game_end_turn")
+	 * @Route("/{id}/end_turn", name="game_end_turn")
 	 * @Method({"GET", "POST"})
 	 */
-	public function endTurnAction(Request $request, Game $game, User $winner)
+	public function endTurnAction(Request $request, GameAnswer $gameAnswer)
 	{
-		//$game = $gameAnswer->getGame();
+		$game = $gameAnswer->getGame();
 		$em = $this->getDoctrine()->getManager();
-		$game->setLeader($winner);
+		$game->setLeader($gameAnswer->getUser());
 		$propositions = $game->getPropositions();
 		foreach($propositions as $rejectedAnswer) {
 			unlink($this->container->getParameter('upload_directory').$rejectedAnswer->getImage()->getImage());
+			$game->removeProposition($rejectedAnswer);
 			$em->remove($rejectedAnswer);
 			$em->flush($game);
 		}
 		$initialImage = $game->getToGuessImage();
+		$game->setToGuessImage(0);
+        $em->persist($game);
 		unlink($this->container->getParameter('upload_directory').$initialImage->getImage());
 		$em->remove($initialImage);
 		$em->flush($initialImage);
@@ -80,6 +83,7 @@ class GameController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $games = $em->getRepository('AppPhotoBundle:Game')->findAll();
+        //$games = $em->getRepository('AppPhotoBundle:Game')->findAllActive();
 
         return $this->render('@AppPhoto/game/index.html.twig', array(
             'games' => $games,

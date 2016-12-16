@@ -33,7 +33,7 @@
                     </div>
                     <ul>
                         <li>
-                            <a href="{{ path('game_end_turn', {id: answer.id, username: user.username}) }}"><button>Valider la solution</button></a>
+                            <a href="{{ path('game_end_turn', {username: user.username, id: answer.id}) }}"><button>Valider la solution</button></a>
                         </li>
                         <li>
                             <button>TODO: Implémenter le rejet des solutions</button>
