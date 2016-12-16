@@ -1,9 +1,10 @@
 {% extends 'AppPhotoBundle:Default:frontLayout.html.twig' %}
 {% block body %}
+    {% for game in games %}
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12">
-				<img class="img-circle img-responsive"  src="https://images5.alphacoders.com/609/thumb-350-609966.jpg" />
+				<img src="{{ asset('uploads/images/medias/' ~ game.toGuessImage.image) }}" alt="{{ game.toGuessImage.comment }}" class="img-responsive">
 			</div>
 		</div>
 		<br />
@@ -14,6 +15,7 @@
 				<a href="{{ path('game_index') }}"><button type="button" class="btn btn-primary">Participer</button></a>
 			</div>
 		</div>
+			{% endfor %}
 		<footer class="navbar-fixed-bottom" style="margin-bottom:8px">
 			<div class="row">
 				<center>
@@ -21,7 +23,7 @@
 						<a title="Profil" href="{{ path('profil') }}"><i class="fa fa-users fa-3x" aria-hidden="true"></i></a>
 					</div>
 					<div class="col-xs-4">
-						<a title="Créer une partie" href="#"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></a>
+						<a title="Créer une partie" href="{{ path('game_new') }}"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></a>
 					</div>
 					<div class="col-xs-4">
 						<a title="Classement" href="{{ path('classement') }}"><i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i></a>

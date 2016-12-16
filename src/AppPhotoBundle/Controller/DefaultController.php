@@ -103,7 +103,9 @@ class DefaultController extends Controller
      */
     public function baseAction()
     {
-        return $this->render('@AppPhoto/Default/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $games = $em->getRepository('AppPhotoBundle:Game')->findAll();
+        return $this->render('@AppPhoto/Default/index.html.twig', array('games'=>$games));
     }
 
     /**

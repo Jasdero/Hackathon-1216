@@ -36,11 +36,10 @@ class GameController extends Controller
 			$em->flush($game);
 		}
 		$initialImage = $game->getToGuessImage();
-		$game->setToGuessImage(0);
-        $em->persist($game);
+		$game->setToGuessImage(null);
 		unlink($this->container->getParameter('upload_directory').$initialImage->getImage());
 		$em->remove($initialImage);
-		$em->flush($initialImage);
+		$em->flush();
 		return $this->redirectToRoute('game_index', array('id' => $game->getId()));
 
 	}

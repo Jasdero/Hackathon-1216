@@ -1,18 +1,21 @@
-{% extends 'AppPhotoBundle:Default:frontLayout.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Liste des parties</h1>
+    <h1>Games list</h1>
 
     <table>
         <thead>
             <tr>
+                <th>Id</th>
                 <td>Image à trouver</td>
         </thead>
         <tbody>
         {% for game in games if (game.toGuessImage is not null) %}
             <tr>
+                <td><a href="{{ path('game_show', { 'id': game.id }) }}">{{ game.id }}</a></td>
                 <td>
-                        <img src="{{ asset('uploads/images/medias/' ~ game.toGuessImage.image) }}" alt="{{ game.toGuessImage.comment }}" class="img-responsive">
+                    <a href="{{ path('game_show', { 'id': game.id }) }}">
+                        <img src="{{ asset('uploads/images/medias/' ~ game.toGuessImage.image) }}" alt="{{ game.toGuessImage.comment }}">
                     </a>
                 </td>
                 <td>
