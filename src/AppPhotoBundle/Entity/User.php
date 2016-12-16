@@ -15,6 +15,13 @@ class User extends BaseUser
 	public function __toString() {
 		return $this->username;
 	}
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->score = 0;
+	}
+
 	/**
 	 * One User has Many Games he leads.
 	 * @ORM\OneToMany(targetEntity="Game", mappedBy="leader", cascade={"remove"})
@@ -41,6 +48,13 @@ class User extends BaseUser
 
 	private $score;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
+     */
+    private $avatar;
+
 	////////////////////
 	// Generated code //
 	////////////////////
@@ -52,11 +66,6 @@ class User extends BaseUser
      */
     protected $id;
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->score = 0;
-    }
 
     /**
      * Add leadedGame
@@ -174,6 +183,20 @@ class User extends BaseUser
         return $this;
     }
 
+	/**
+	 * Add score
+	 *
+	 * @param integer $points
+	 *
+	 * @return User
+	 */
+	public function addScore($points)
+	{
+		$this->score += $points;
+
+		return $this;
+	}
+
     /**
      * Get score
      *
@@ -182,5 +205,29 @@ class User extends BaseUser
     public function getScore()
     {
         return $this->score;
+    }
+
+    /**
+     * Set avatar
+     *
+     * @param string $avatar
+     *
+     * @return User
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return string
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
     }
 }

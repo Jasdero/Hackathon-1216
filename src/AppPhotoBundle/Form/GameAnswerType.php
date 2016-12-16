@@ -13,7 +13,10 @@ class GameAnswerType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('image')->add('user')->add('game')        ;
+        $builder
+			->add('image', ImageType::class, array('label' => "Image solution"))
+			->add('user')
+			->add('game');
     }
     
     /**

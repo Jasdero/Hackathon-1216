@@ -28,7 +28,7 @@ class ImageController extends Controller
 
         $images = $em->getRepository('AppPhotoBundle:Image')->findAll();
 
-        return $this->render('image/index.html.twig', array(
+        return $this->render('@AppPhoto/image/index.html.twig', array(
             'images' => $images,
         ));
     }
@@ -43,24 +43,17 @@ class ImageController extends Controller
     {
         $image = new Image();
         $form = $this->createForm('AppPhotoBundle\Form\ImageType', $image);
+        $form->add('imageFile', 'file');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $image->getImage();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $image->setImage($fileName);
-            $file->move(
-                $this->getParameter('app.path.product_images'),
-                $fileName
-            );
             $em = $this->getDoctrine()->getManager();
             $em->persist($image);
             $em->flush($image);
-
             return $this->redirectToRoute('image_show', array('id' => $image->getId()));
         }
 
-        return $this->render('image/new.html.twig', array(
+        return $this->render('@AppPhoto/image/new.html.twig', array(
             'image' => $image,
             'form' => $form->createView(),
         ));
@@ -76,7 +69,7 @@ class ImageController extends Controller
     {
         $deleteForm = $this->createDeleteForm($image);
 
-        return $this->render('image/show.html.twig', array(
+        return $this->render('@AppPhoto/image/show.html.twig', array(
             'image' => $image,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -100,7 +93,7 @@ class ImageController extends Controller
             return $this->redirectToRoute('image_edit', array('id' => $image->getId()));
         }
 
-        return $this->render('image/edit.html.twig', array(
+        return $this->render('@AppPhoto/image/edit.html.twig', array(
             'image' => $image,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

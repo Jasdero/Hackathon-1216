@@ -13,7 +13,10 @@ class GameType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('leader')->add('toGuessImage');
+        $builder
+			->add('leader')
+			->add('toGuessImage', ImageType::class, array('label' => "Image à trouver"))
+		;
     }
     
     /**

@@ -1,31 +1,70 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'AppPhotoBundle:Default:frontLayout.html.twig' %}
 {% block body %}
     <h1>Game</h1>
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ game.id }}</td>
+                <td>Image</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('game_index') }}">Back to the list</a>
+            <a href="{{ path('game_index') }}">Retour à la liste des jeux</a>
         </li>
         <li>
-            <a href="{{ path('game_edit', { 'id': game.id }) }}">Edit</a>
+            <img src="{{ asset('uploads/images/medias/' ~ game.toGuessImage.image) }}" alt="{{ game.toGuessImage.comment }}" class="img-responsive">
         </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
+    </ul>
+    {% if is_leader %}
+        <h1>You are the leader</h1>
+        <ul>
+            <li>
+				{% for answer in answers %}
+                    <div>
+                        <p>Solution postée par <strong>{{ answer.user }}</strong> : </p>
+                        <img src="{{ asset('uploads/images/medias/' ~ answer.image.image) }}" alt="{{ answer.image.comment }}" class="img-responsive">
+
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="{{ path('game_end_turn', {username: user.username, id: answer.id}) }}"><button>Valider la solution</button></a>
+                        </li>
+                        <li>
+                            <button>TODO: Implémenter le rejet des solutions</button>
+                        </li>
+                    </ul>
+				{% endfor %}
+            </li>
+            <li>
+				{{ form_start(delete_form) }}
+                    <input type="submit" value="Supprimer l'image (et la quête)">
+				{{ form_end(delete_form) }}
+            </li>
+        </ul>
+    {% else %}
+        <h1>You are a player</h1>
         <a href="{{ path('gameanswer_new', {id: game.id}) }}">
             <button>Poster une réponse</button>
         </a>
-    </ul>
+    {% endif %}
+    {% block footer %}
+        <footer class="navbar-fixed-bottom" style="margin-bottom:8px">
+            <div class="row">
+                <center>
+                    <div class="col-xs-4">
+                        <a title="Profil" href="{{ path('profil') }}"><i class="fa fa-users fa-3x" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a title="Créer une partie" href="{{ path('game_new') }}"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a title="Classement" href="{{ path('classement') }}"><i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i></a>
+                    </div>
+                </center>
+            </div>
+        </footer>
+    {% endblock %}
 {% endblock %}

@@ -1,29 +1,21 @@
 {% extends 'AppPhotoBundle:Default:frontLayout.html.twig' %}
 {% block body %}
-	<style>
-		.back {
-		}
-	</style>
+    {% for game in games if (game.toGuessImage is not null) %}
 	<div class="container-fluid">
-
-
 		<div class="row">
 			<div class="col-xs-12">
-				<img class="img-responsive img-circle"  src="https://images5.alphacoders.com/609/thumb-350-609966.jpg" />
+				<img src="{{ asset('uploads/images/medias/' ~ game.toGuessImage.image) }}" alt="{{ game.toGuessImage.comment }}" class="img-responsive">
 			</div>
 		</div>
-
 		<br />
-
 		<div class="row jumbotron">
 			<div class="col-xs-12 " style="text-align: center;">
-				<div style="margin-bottom: 15px;">Postée par : <br />
-					<a href="">machin</a> </div>
-				<button type="button" class="btn btn-primary">Participer</button>
+				<div style="margin-bottom: 15px;">Postée par : {{ game.leader }} <br />
+					 </div>
+				<a href="{{ path('game_index') }}"><button type="button" class="btn btn-primary">Participer</button></a>
 			</div>
 		</div>
-
-
+			{% endfor %}
 		<footer class="navbar-fixed-bottom" style="margin-bottom:8px">
 			<div class="row">
 				<center>
@@ -31,20 +23,13 @@
 						<a title="Profil" href="{{ path('profil') }}"><i class="fa fa-users fa-3x" aria-hidden="true"></i></a>
 					</div>
 					<div class="col-xs-4">
-						<a title="Créer une partie" href="#"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></a>
+						<a title="Créer une partie" href="{{ path('game_new') }}"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></a>
 					</div>
 					<div class="col-xs-4">
-						<a title="Classement" href="#"><i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i></a>
+						<a title="Classement" href="{{ path('classement') }}"><i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i></a>
 					</div>
 				</center>
 			</div>
 		</footer>
-
-
 	</div>
-
-
-
-
-
 {% endblock %}

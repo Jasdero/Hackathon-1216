@@ -14,6 +14,11 @@ class Game
 	public function __toString() {
 		return "Game #" . $this->id . "\t by " . strval($this->leader);
 	}
+
+	public function answerNotice(GameAnswer $gameAnswer) {
+		// TODO: Ajouter le bundle des notifications du leader ici
+	}
+
 	/**
 	 * One Game has One Leader.
 	 * @ORM\ManyToOne(targetEntity="User", inversedBy="leadedGames")
@@ -29,7 +34,7 @@ class Game
 
 	/**
 	 * One Game has One To guess Image.
-	 * @ORM\OneToOne(targetEntity="Image")
+	 * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
 	 * @ORM\JoinColumn(name="to_guess_image_id", referencedColumnName="id")
 	 */
 	private $toGuessImage;

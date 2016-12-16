@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'AppPhotoBundle:Default:frontLayout.html.twig' %}
 
 {% block body %}
     <h1>Games list</h1>
@@ -6,23 +6,18 @@
     <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Actions</th>
-            </tr>
+                <td>Image à trouver</td>
         </thead>
         <tbody>
-        {% for game in games %}
+        {% for game in games if (game.toGuessImage is not null) %}
             <tr>
-                <td><a href="{{ path('game_show', { 'id': game.id }) }}">{{ game.id }}</a></td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('game_show', { 'id': game.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('game_edit', { 'id': game.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('game_show', { 'id': game.id }) }}">
+                        <img src="{{ asset('uploads/images/medias/' ~ game.toGuessImage.image) }}" alt="{{ game.toGuessImage.comment }}" class="img-responsive">
+                    </a>
+                </td>
+                <td>
+                    <li><a href="{{ path('game_show', { 'id': game.id }) }}">Lancez-vous !</a></li>
                 </td>
             </tr>
         {% endfor %}
@@ -34,4 +29,21 @@
             <a href="{{ path('game_new') }}">Create a new game</a>
         </li>
     </ul>
+{% endblock %}
+{% block footer %}
+    <footer class="navbar-fixed-bottom" style="margin-bottom:8px">
+        <div class="row">
+            <center>
+                <div class="col-xs-4">
+                    <a title="Profil" href="{{ path('profil') }}"><i class="fa fa-users fa-3x" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-xs-4">
+                    <a title="Créer une partie" href="{{ path('game_new') }}"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-xs-4">
+                    <a title="Classement" href="{{ path('classement') }}"><i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i></a>
+                </div>
+            </center>
+        </div>
+    </footer>
 {% endblock %}
